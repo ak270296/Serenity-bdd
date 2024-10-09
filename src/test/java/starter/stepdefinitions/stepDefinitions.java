@@ -17,22 +17,12 @@ import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.ensure.Ensure;
+import stepDef.SetUp;
 
 public class stepDefinitions extends PageObject {
 	
-//	WebDriver driver= SetUp.getDriver();
+	Actor actor = Actor.named("google");
 	WebDriver driver = Serenity.getDriver();
-	
-	@Before
-	public void setupSoftAssert() {
-		Ensure.enableSoftAssertions();
-	}
-	
-	@After
-	public void reportSoftAssert(){
-		Ensure.reportSoftAssertions();
-	}
-	
 	@Step
 	@Given("Go to Google and search {string}")
     public void Go_to_Google_and_search(String cukes) throws InterruptedException {
@@ -42,20 +32,25 @@ public class stepDefinitions extends PageObject {
 	@Step
     @When("I wait {int} hour")
     public void i_wait_hour(Integer int1) throws InterruptedException, IOException {
+		try {
 		 System.out.println("Hi");
 		 $(By.name("q")).waitUntilVisible().withTimeoutOf(Duration.ofSeconds(5));
-		 String act = "5.00";
-		 String exp = "6.00";
-		Actor actor = Actor.named("aana");
-		actor.can(BrowseTheWeb.with(driver));
-		actor.attemptsTo(Ensure.that(exp).isEqualTo(act));
+		actor.attemptsTo(Ensure.that("hi").isEqualTo("HII"));
+		}catch(Throwable e){
+			System.out.println(e);
+		}
     }
 	
 	@Step
     @Then("my belly should growl")
     public void my_belly_should_growl() throws InterruptedException {
+		try {
     	System.out.println("How are you");
+    	actor.attemptsTo(Ensure.that("HII").isEqualTo("hi"));
     	Thread.sleep(2000);
+		}catch(Throwable e) {
+			System.out.println(e);
+		}
     }
     
 

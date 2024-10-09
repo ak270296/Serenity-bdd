@@ -21,10 +21,8 @@ public class Hooks extends SetUp{
 	@Before
 	public void startTest(Scenario scenario) throws Exception {
 		System.out.println("-------Started scenario------");
-		String browser = "";
 		
         environmentVariables.setProperty("environment", "chrome");
-//        environmentVariables.setProperty("browserVersion", "126");
         driver=Serenity.getDriver();
         driver.manage().window().maximize();
 //        SetUp.setDriver(driver);
